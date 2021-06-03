@@ -14,5 +14,29 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyBXfK38V4NnjsFPKNE3pspUiXIY6mAC7IM",
+    authDomain: "wheres-waldo-158de.firebaseapp.com",
+    projectId: "wheres-waldo-158de",
+    storageBucket: "wheres-waldo-158de.appspot.com",
+    messagingSenderId: "953997612020",
+    appId: "1:953997612020:web:2942162a86d29ef4305fa1",
+    measurementId: "G-6SX66SH8T9"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
   </body>
 </html>
