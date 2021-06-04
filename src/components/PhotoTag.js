@@ -1,20 +1,29 @@
-
 const photoTag = () => {
 
-    // create array with tag information
+  // create array with tag information
 
-  const selectTag = (name, coordinates) => {
-    return name;
+const coordinateRange = (correctCoordinate, selectedCoordinate) => {
+  if (selectedCoordinate <= (correctCoordinate + 5) && (selectedCoordinate >= correctCoordinate - 5)) {
+    return true;
   }
+}
 
-  const selectCharacter = () => {
-    return ('Waldo');
+const selectTag = (correctX, correctY, selectedX, selectedY) => {
+  if (coordinateRange(correctX, selectedX) && coordinateRange(correctY, selectedY)) {
+    return true;
+  } else {
+    return false;
   }
+}
 
-  return {
-    selectTag,
-    selectCharacter
-  };
+const selectCharacter = () => {
+  return ('Waldo');
+}
+
+return {
+  selectTag,
+  selectCharacter
+};
 }
 
 export default photoTag;
