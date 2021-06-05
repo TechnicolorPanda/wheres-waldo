@@ -16,7 +16,9 @@ const photoTag = () => {
     }
   }
 
-  const selectTag = (correctX, correctY, selectedX, selectedY) => {
+  const selectTag = (number, selectedX, selectedY) => {
+    const correctX = tagArray.image[number].x;
+    const correctY = tagArray.image[number].y;
     if (coordinateRange(correctX, selectedX) && coordinateRange(correctY, selectedY)) {
       return true;
     } else {
