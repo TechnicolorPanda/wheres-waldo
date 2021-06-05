@@ -1,7 +1,5 @@
 const photoTag = () => {
 
-  // create array with tag information
-
   const tagArray = {
     image: [
       {name: 'Waldo', x: '40', y: '50'},
