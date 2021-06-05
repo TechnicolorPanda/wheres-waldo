@@ -19,3 +19,8 @@ test('returns number of items remaining to be found', () => {
   expect(scores.objectsRemain(false)).toEqual(2);
   expect(scores.objectsRemain(true)).toEqual(1);
 })
+
+test('determines when last item is found', () => {
+  expect(scores.lastObjectFound(0)).toBeTruthy();
+  expect(scores.lastObjectFound(3)).toBeFalsy();
+})

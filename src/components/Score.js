@@ -18,9 +18,23 @@ const score = () => {
     return remaining;
   }
 
+  const lastObjectFound = (remaining) => {
+    if(remaining === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const stopTimer = () => {
+    // stop the timer at the end
+  }
+
   return {
     timer,
     objectsRemain,
+    lastObjectFound,
+    stopTimer,
   }
 }
 
