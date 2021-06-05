@@ -1,6 +1,7 @@
 const score = () => {
 
   let seconds = 0;
+  let remaining = 3;
 
   const myTimer = () => {
     seconds = seconds + 1;
@@ -12,8 +13,9 @@ const score = () => {
     return time;
   }
 
-  const objectsRemain = () => {
-    // when object is found return number of objects that remain
+  const objectsRemain = (correctSelection) => {
+    if(correctSelection) {remaining = remaining - 1};
+    return remaining;
   }
 
   return {
