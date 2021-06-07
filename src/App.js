@@ -1,14 +1,15 @@
+import React, { Component } from 'react';
+import PlayGame from './components/PlayGame';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-        </p>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className = "play-board">
+        <PlayGame/>
+      </div>
+    );
+  }
 }
 
 export default App;

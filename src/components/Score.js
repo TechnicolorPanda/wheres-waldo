@@ -1,3 +1,4 @@
+
 const score = () => {
 
   let seconds = 0;
@@ -13,6 +14,12 @@ const score = () => {
     return time;
   }
 
+  const stopTimer = () => {
+    let time = timer();
+    clearInterval(time);
+    return time;
+  }
+
   const objectsRemain = (correctSelection) => {
     if(correctSelection) {remaining = remaining - 1};
     return remaining;
@@ -24,10 +31,6 @@ const score = () => {
     } else {
       return false;
     }
-  }
-
-  const stopTimer = () => {
-    // stop the timer at the end
   }
 
   return {
