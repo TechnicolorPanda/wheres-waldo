@@ -24,9 +24,3 @@ test('determines when last item is found', () => {
   expect(scores.lastObjectFound(0)).toBeTruthy();
   expect(scores.lastObjectFound(3)).toBeFalsy();
 })
-
-test('returns time in which tags were found', () => {
-//   jest.advanceTimersByTime(1000);
-
-  expect(scores.stopTimer()).toEqual(1);
-})

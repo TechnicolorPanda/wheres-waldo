@@ -11,14 +11,14 @@ const Header = (props) => {
   return (
     <div className = 'content'>
       <div className = 'nav-bar'>
-        <p class = 'remaining' id = 'items-remain'>Items remaining: {items}</p>
-        <nav class='nav'></nav>
+        <p className = 'remaining' id = 'items-remain'>Items remaining: {items}</p>
+        <nav className ='nav'></nav>
         <p>
-          <span class = 'title' id = 'where'>Where's </span>
-          <span class = 'title' id = 'waldo'> Waldo</span>
+          <span className = 'title' id = 'where'>Where's </span>
+          <span className = 'title' id = 'waldo'> Waldo</span>
         </p>
-        <nav class='nav'></nav>
-        <p class = 'timer' id = 'timer'>Time: {timer}</p>
+        <nav className ='nav'></nav>
+        <p className = 'timer' id = 'timer'>Time: {timer}</p>
       </div>
     </div>
   );
