@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import TaggedImage from './TaggedImage';
+import Score from './Score';
 import waldoBeach from '../images/waldo1.jpg';
 
 const PlayGame = () => {
 
-  const [items, setItems] = useState(0);
+  const [items, setItems] = useState(3);
   const [timer, setTimer] = useState(0);
   const [photo, setPhoto] = useState(waldoBeach);
+
+  const scores = Score();
+
+  const changeScore = (correctSelection) => {
+    const remaining = scores.objectsRemain(correctSelection);
+    setItems(remaining);
+  }
+
+  useEffect(() => {
+    const correctSelection = true;
+    changeScore(correctSelection);
+  }, []);
 
   return (
     <div>
