@@ -18,6 +18,13 @@ const PlayGame = () => {
   }
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer(scores.myTimer(timer));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     const correctSelection = true;
     changeScore(correctSelection);
   }, []);

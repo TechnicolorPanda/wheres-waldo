@@ -9,13 +9,7 @@ const score = () => {
     return seconds;
   }
 
-  const timer = () => {
-    let time = setInterval(myTimer, 1000);
-    return time;
-  }
-
-  const stopTimer = () => {
-    let time = timer();
+  const stopTimer = (time) => {
     clearInterval(time);
     return time;
   }
@@ -34,7 +28,7 @@ const score = () => {
   }
 
   return {
-    timer,
+    myTimer,
     objectsRemain,
     lastObjectFound,
     stopTimer,
