@@ -10,7 +10,7 @@ const TaggedImage = (props) => {
   return (
     <div className = 'content'>
       <div className = 'body'>
-        <img className = 'photo' src = {photo} alt = 'Wheres Waldo Beach Scene'/>
+        <img className = 'photo' src = {photo} alt = 'Wheres Waldo Beach Scene' ismap/>
       </div>
     </div>
   );

@@ -9,6 +9,18 @@ const score = () => {
     return seconds;
   }
 
+  const formattedTime = (seconds) => {
+    const minutes = Math.floor(seconds/60);
+    const remainingSeconds = seconds - (minutes * 60);
+    if (minutes > 0 && remainingSeconds > 9) {
+      return (minutes + ':' + remainingSeconds);
+    } else if (minutes > 0 && remainingSeconds < 10) {
+      return (minutes + ':0' + remainingSeconds);
+    } else {
+      return seconds.toString();
+    }
+  }
+
   const stopTimer = (time) => {
     clearInterval(time);
     return time;
@@ -29,6 +41,7 @@ const score = () => {
 
   return {
     myTimer,
+    formattedTime,
     objectsRemain,
     lastObjectFound,
     stopTimer,
