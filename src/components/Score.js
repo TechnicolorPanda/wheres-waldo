@@ -6,7 +6,8 @@ const score = () => {
 
   const myTimer = () => {
     seconds = seconds + 1;
-    return seconds;
+    const time = formattedTime(seconds);
+    return time;
   }
 
   const formattedTime = (seconds) => {
