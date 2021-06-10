@@ -9,6 +9,7 @@ const PlayGame = () => {
   const [items, setItems] = useState(3);
   const [timer, setTimer] = useState(0);
   const [photo, setPhoto] = useState(waldoBeach);
+  const [dropdown, setDropdown] = useState(false);
 
   const scores = Score();
 
@@ -29,6 +30,13 @@ const PlayGame = () => {
     changeScore(correctSelection);
   }, []);
 
+  const findItem = (event) => {
+    console.log('find item');
+    const dropdownMenu = document.getElementById('dropdown-content');
+    setDropdown(!dropdown);
+    dropdown ? dropdownMenu.style.display = 'block': dropdownMenu.style.display = 'none';
+  }
+
   return (
     <div>
       <Header
@@ -37,6 +45,8 @@ const PlayGame = () => {
       />
       <TaggedImage
         photo = {photo}
+        findItem = {findItem.bind(this)}
+        dropdown = {dropdown}
       />
     </div>
   )
