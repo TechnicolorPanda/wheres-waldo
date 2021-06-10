@@ -30,11 +30,13 @@ const PlayGame = () => {
     changeScore(correctSelection);
   }, []);
 
-  const findItem = (event) => {
-    console.log('find item');
+  useEffect(() => {
     const dropdownMenu = document.getElementById('dropdown-content');
-    setDropdown(!dropdown);
     dropdown ? dropdownMenu.style.display = 'block': dropdownMenu.style.display = 'none';
+  }, [dropdown])
+
+  const findItem = (event) => {
+    setDropdown(!dropdown);
   }
 
   return (
