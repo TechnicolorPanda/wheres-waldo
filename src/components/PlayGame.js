@@ -36,7 +36,20 @@ const PlayGame = () => {
   }, [dropdown])
 
   const findItem = (event) => {
+    event.preventDefault();
     setDropdown(!dropdown);
+    let xPosition = event.clientX;
+    console.log(xPosition);
+    let yPosition = event.clientY;
+    console.log(yPosition);
+    positionButton(xPosition, yPosition);
+  }
+
+  const positionButton = (x, y) => {
+    const buttonPlacement = document.getElementById('dropdown-content');
+    buttonPlacement.style.position = "absolute";
+    buttonPlacement.style.left = x + 'px';
+    buttonPlacement.style.top = y + 'px';
   }
 
   return (

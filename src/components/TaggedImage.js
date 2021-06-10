@@ -6,13 +6,14 @@ const TaggedImage = (props) => {
   const { 
     photo,
     findItem,
-    dropdown,
   } = props;
 
   return (
     <div className = 'content'>
       <div className = 'body'>
-        <button type = 'button' className = 'button'>
+        <button type = 'button' 
+        className = 'button'
+        id = 'button-class'>
         <img className = 'play' src = {photo} alt = 'Wheres Waldo Beach Scene'
           onClick = {findItem}
         ></img>
