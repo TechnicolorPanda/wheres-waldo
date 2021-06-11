@@ -45,25 +45,30 @@ aside {
 img {
     position: relative;
     margin-top: 2em;
-    height: auto;
     border-style: solid;
     border-color: black;
     border-width: 2px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
+}
+
+.play {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 500px;
+  width: 800px;
 }
 
 .dropdown-content {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 300px;
+  width: auto;
   z-index: 2;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid black;
+  border-radius: 2%;
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
   background-color: lightskyblue;
+  font: 'arial';
 }
 
 ul {
