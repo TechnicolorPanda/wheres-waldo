@@ -40,12 +40,18 @@ const score = () => {
     }
   }
 
+  const changeScore = (correctSelection) => {
+    const remaining = objectsRemain(correctSelection);
+    return remaining;
+  }
+
   return {
     myTimer,
     formattedTime,
     objectsRemain,
     lastObjectFound,
     stopTimer,
+    changeScore,
   }
 }
 

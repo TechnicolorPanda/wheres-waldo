@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import TaggedImage from './TaggedImage';
 import Score from './Score';
+import photoTag from './PhotoTag';
 import waldoBeach from '../images/waldo1.jpg';
 
 const PlayGame = () => {
@@ -10,13 +11,13 @@ const PlayGame = () => {
   const [timer, setTimer] = useState(0);
   const [photo, setPhoto] = useState(waldoBeach);
   const [dropdown, setDropdown] = useState(false);
+  const [xCoordinate, setXCoordinate] = useState(0);
+  const [yCoordinate, setYCoordinate] = useState(0);
 
   const scores = Score();
+  const tag = photoTag();
 
-  const changeScore = (correctSelection) => {
-    const remaining = scores.objectsRemain(correctSelection);
-    setItems(remaining);
-  }
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,9 +27,11 @@ const PlayGame = () => {
   }, []);
 
   useEffect(() => {
-    const correctSelection = true;
-    changeScore(correctSelection);
-  }, []);
+    const item = 0;
+    const correctSelection = tag.selectTag(item, xCoordinate, yCoordinate);
+    const currentScore = scores.changeScore(correctSelection);
+    setItems(currentScore);
+  }, [xCoordinate, yCoordinate]);
 
   useEffect(() => {
     const dropdownMenu = document.getElementById('dropdown-content');
@@ -39,10 +42,10 @@ const PlayGame = () => {
     event.preventDefault();
     setDropdown(!dropdown);
     let xPosition = event.clientX;
-    console.log(xPosition);
     let yPosition = event.clientY;
-    console.log(yPosition);
     positionButton(xPosition, yPosition);
+    setXCoordinate(xPosition);
+    setYCoordinate(yPosition);
   }
 
   const positionButton = (x, y) => {

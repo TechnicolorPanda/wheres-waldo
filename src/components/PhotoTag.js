@@ -2,9 +2,9 @@ const photoTag = () => {
 
   const tagArray = {
     image: [
-      {name: 'Waldo', x: '40', y: '50'},
-      {name: 'cactus', x: '0', u: '10'},
-      {name: 'winter scarf', x: '100', y: '30'},
+      {name: 'Waldo', x: '588', y: '307'},
+      {name: 'cactus', x: '808', y: '327'},
+      {name: 'winter scarf', x: '273', y: '588'},
     ]
   }
 
