@@ -6,6 +6,8 @@ const TaggedImage = (props) => {
   const { 
     photo,
     findItem,
+    items,
+    selectItem,
   } = props;
 
   return (
@@ -16,9 +18,9 @@ const TaggedImage = (props) => {
         ></img>
         <div className = 'dropdown-content' id = 'dropdown-content'>
           <ul>
-            <li>Waldo</li>
-            <li>cactus</li>
-            <li>winter scarf</li>
+            <button onClick = {selectItem} value = {items}>
+              {items}
+            </button>
           </ul>
         </div>
       </div>

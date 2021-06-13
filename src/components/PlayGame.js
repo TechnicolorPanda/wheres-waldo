@@ -4,6 +4,7 @@ import TaggedImage from './TaggedImage';
 import Score from './Score';
 import photoTag from './PhotoTag';
 import waldoBeach from '../images/waldo1.jpg';
+import uniqid from 'uniqid';
 
 const PlayGame = () => {
 
@@ -16,8 +17,6 @@ const PlayGame = () => {
 
   const scores = Score();
   const tag = photoTag();
-
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -55,6 +54,15 @@ const PlayGame = () => {
     buttonPlacement.style.top = y + 'px';
   }
 
+  const selectItem = (event) => {
+    var value = event.target.value;
+    console.log(value);
+  }
+
+  const listItems = Object.keys(tag.tagArray).map((item) => 
+    <li key = {uniqid()}>{item}</li>
+  );
+
   return (
     <div>
       <Header
@@ -65,6 +73,8 @@ const PlayGame = () => {
         photo = {photo}
         findItem = {findItem.bind(this)}
         dropdown = {dropdown}
+        items = {listItems}
+        selectItem = {selectItem.bind(this)}
       />
     </div>
   )
