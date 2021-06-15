@@ -3,6 +3,7 @@ import Header from './Header';
 import TaggedImage from './TaggedImage';
 import Score from './Score';
 import photoTag from './PhotoTag';
+import tagArray from './tagArray';
 import waldoBeach from '../images/waldo1.jpg';
 import uniqid from 'uniqid';
 
@@ -14,9 +15,11 @@ const PlayGame = () => {
   const [dropdown, setDropdown] = useState(false);
   const [xCoordinate, setXCoordinate] = useState(0);
   const [yCoordinate, setYCoordinate] = useState(0);
+  const [itemNumber, setItemNumber] = useState('');
 
   const scores = Score();
   const tag = photoTag();
+  const firebase = tagArray();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,11 +29,12 @@ const PlayGame = () => {
   }, []);
 
   useEffect(() => {
-    const item = 0;
-    const correctSelection = tag.selectTag(item, xCoordinate, yCoordinate);
-    const currentScore = scores.changeScore(correctSelection);
-    setItems(currentScore);
-  }, [xCoordinate, yCoordinate]);
+     if(typeof itemNumber === 'number') {
+      const correctSelection = tag.selectTag(itemNumber, xCoordinate, yCoordinate);
+      const currentScore = scores.changeScore(correctSelection);
+      setItems(currentScore);
+    }
+  }, [itemNumber]);
 
   useEffect(() => {
     const dropdownMenu = document.getElementById('dropdown-content');
@@ -38,6 +42,7 @@ const PlayGame = () => {
   }, [dropdown])
 
   const findItem = (event) => {
+    console.log('find item');
     event.preventDefault();
     setDropdown(!dropdown);
     let xPosition = event.clientX;
@@ -55,11 +60,15 @@ const PlayGame = () => {
   }
 
   const selectItem = (event) => {
-    var value = event.target.value;
-    console.log(value);
+    console.log('select item');
+    // TODO: return correct target value
+    event.preventDefault();
+    const itemValue = event.target.value;
+    console.log(itemValue);
+    setItemNumber(itemValue);
   }
 
-  const listItems = Object.keys(tag.tagArray).map((item) => 
+  const listItems = Object.keys(firebase.tagArray).map((item) => 
     <li key = {uniqid()}>{item}</li>
   );
 
