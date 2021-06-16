@@ -17,6 +17,7 @@ const PlayGame = () => {
   const [xCoordinate, setXCoordinate] = useState(0);
   const [yCoordinate, setYCoordinate] = useState(0);
   const [itemNumber, setItemNumber] = useState('');
+  const [tagOptions, setTagOptions] = useState([]);
 
   const scores = Score();
   const tag = photoTag();
@@ -42,19 +43,7 @@ const PlayGame = () => {
     dropdown ? dropdownMenu.style.display = 'block': dropdownMenu.style.display = 'none';
   }, [dropdown])
 
-
-  useEffect(() => {
-    config().database.collection('tags').get().then((snapshot) => {
-      console.log('testing');
-      snapshot.docs.forEach(doc => {
-        console.log(doc.data());
-      });
-    })
-  }, []);
-  
-
   const findItem = (event) => {
-    console.log('find item');
     event.preventDefault();
     setDropdown(!dropdown);
     let xPosition = event.clientX;
@@ -80,10 +69,22 @@ const PlayGame = () => {
     setItemNumber(itemValue);
   }
 
-  const listItems = 
-    Object.keys(firebase.tagArray).map((item) => 
-    <li key = {uniqid()}>{item}</li>
-  );
+
+  useEffect(() => {
+    let tagNames = [];
+    config().database.collection('tags').get().then((snapshot) => {
+      snapshot.docs.forEach(doc => {
+        tagNames = tagNames.concat(doc.data().name);
+      });
+      setTagOptions(tagNames);
+    })
+  }, []);
+
+  const listItems = (
+    tagOptions.map((item) => 
+      <li key = {uniqid()}>{item}</li>
+    )
+  )
 
   return (
     <div>

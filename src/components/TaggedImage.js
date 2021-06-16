@@ -21,7 +21,7 @@ const TaggedImage = (props) => {
         <div className = 'dropdown-content' id = 'dropdown-content'>
           <ul>
             <button onClick = {selectItem} value = {items}>
-              <li value = {items}>{items}</li>
+              <div value = {items}>{items}</div>
             </button>
           </ul>
         </div>
