@@ -4,6 +4,7 @@ import TaggedImage from './TaggedImage';
 import Score from './Score';
 import photoTag from './PhotoTag';
 import tagArray from './tagArray';
+import config from './firebaseConfig';
 import waldoBeach from '../images/waldo1.jpg';
 import uniqid from 'uniqid';
 
@@ -41,6 +42,17 @@ const PlayGame = () => {
     dropdown ? dropdownMenu.style.display = 'block': dropdownMenu.style.display = 'none';
   }, [dropdown])
 
+
+  useEffect(() => {
+    config().database.collection('tags').get().then((snapshot) => {
+      console.log('testing');
+      snapshot.docs.forEach(doc => {
+        console.log(doc.data());
+      });
+    })
+  }, []);
+  
+
   const findItem = (event) => {
     console.log('find item');
     event.preventDefault();
@@ -68,7 +80,8 @@ const PlayGame = () => {
     setItemNumber(itemValue);
   }
 
-  const listItems = Object.keys(firebase.tagArray).map((item) => 
+  const listItems = 
+    Object.keys(firebase.tagArray).map((item) => 
     <li key = {uniqid()}>{item}</li>
   );
 

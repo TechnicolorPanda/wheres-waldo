@@ -4,12 +4,6 @@ const photoTag = () => {
 
   const firebase = tagArray();
 
-  // const tagArray = [
-  //     {name: 'Waldo', x: '588', y: '307'},
-  //     {name: 'cactus', x: '808', y: '327'},
-  //     {name: 'winter scarf', x: '273', y: '588'}
-  // ]
-
   const coordinateRange = (correctCoordinate, selectedCoordinate) => {
     if (selectedCoordinate <= (correctCoordinate + 5) && (selectedCoordinate >= correctCoordinate - 5)) {
       return true;
