@@ -1,8 +1,26 @@
-import tagArray from './tagArray';
+import config from './firebaseConfig';
 
 const photoTag = () => {
 
-  const firebase = tagArray();
+  const retrieveXCoordinate = (selectedName) => {
+    config().database.collection('tags').get().then((snapshot) => {
+      snapshot.docs.forEach(doc => {
+        if (doc.data().name === selectedName) {
+          return doc.data().x;
+        };
+      });
+    })
+  }
+
+  const retrieveYCoordinate = (selectedName) => {
+    config().database.collection('tags').get().then((snapshot) => {
+      snapshot.docs.forEach(doc => {
+        if (doc.data().name === selectedName) {
+          return doc.data().y;
+        };
+      });
+    })
+  }
 
   const coordinateRange = (correctCoordinate, selectedCoordinate) => {
     if (selectedCoordinate <= (correctCoordinate + 5) && (selectedCoordinate >= correctCoordinate - 5)) {
@@ -10,25 +28,20 @@ const photoTag = () => {
     }
   }
 
-  const selectTag = (number, selectedX, selectedY) => {
-    const correctX = firebase.tagArray[number].x;
-    const correctY = firebase.tagArray[number].y;
-    if (coordinateRange(correctX, selectedX) && coordinateRange(correctY, selectedY)) {
-      return true;
-    } else {
-      return false;
-    }
+  const selectTag = (selectedName, selectedX, selectedY) => {
+    // const correctX = retrieveXCoordinate(selectedName);
+    // const correctY = retrieveYCoordinate(selectedName);
+    // if (coordinateRange(correctX, selectedX) && coordinateRange(correctY, selectedY)) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+    return false;
   }
 
-  const selectCharacter = (number) => {
-    return firebase.tagArray[number].name;
-  }
-
-return {
-  selectTag,
-  selectCharacter,
-  tagArray,
-};
+  return {
+    selectTag,
+  };
 }
 
 export default photoTag;

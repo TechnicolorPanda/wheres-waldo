@@ -3,7 +3,6 @@ import Header from './Header';
 import TaggedImage from './TaggedImage';
 import Score from './Score';
 import photoTag from './PhotoTag';
-import tagArray from './tagArray';
 import config from './firebaseConfig';
 import waldoBeach from '../images/waldo1.jpg';
 import uniqid from 'uniqid';
@@ -16,12 +15,11 @@ const PlayGame = () => {
   const [dropdown, setDropdown] = useState(false);
   const [xCoordinate, setXCoordinate] = useState(0);
   const [yCoordinate, setYCoordinate] = useState(0);
-  const [itemNumber, setItemNumber] = useState('');
+  const [itemName, setItemName] = useState('');
   const [tagOptions, setTagOptions] = useState([]);
 
   const scores = Score();
   const tag = photoTag();
-  const firebase = tagArray();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -30,18 +28,28 @@ const PlayGame = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // changes remaining items when correct item is selected
+
   useEffect(() => {
-     if(typeof itemNumber === 'number') {
-      const correctSelection = tag.selectTag(itemNumber, xCoordinate, yCoordinate);
+    console.log('item number ' + itemName)
+
+     if(typeof itemName === 'string') {
+      const correctSelection = tag.selectTag(itemName, xCoordinate, yCoordinate);
+      console.log(correctSelection);
       const currentScore = scores.changeScore(correctSelection);
+      console.log(currentScore);
       setItems(currentScore);
     }
-  }, [itemNumber]);
+  }, [itemName]);
+
+  // toggles between hiding and showing dropdown menu
 
   useEffect(() => {
     const dropdownMenu = document.getElementById('dropdown-content');
     dropdown ? dropdownMenu.style.display = 'block': dropdownMenu.style.display = 'none';
   }, [dropdown])
+
+  // determines coordinates of point clicked
 
   const findItem = (event) => {
     event.preventDefault();
@@ -53,6 +61,8 @@ const PlayGame = () => {
     setYCoordinate(yPosition);
   }
 
+  // positions dropdown button on point selected
+
   const positionButton = (x, y) => {
     const buttonPlacement = document.getElementById('dropdown-content');
     buttonPlacement.style.position = "absolute";
@@ -60,15 +70,15 @@ const PlayGame = () => {
     buttonPlacement.style.top = y + 'px';
   }
 
+  // retrieves dropdown item selected
+
   const selectItem = (event) => {
-    console.log('select item');
-    // TODO: return correct target value
     event.preventDefault();
-    const itemValue = event.target.value;
-    console.log(itemValue);
-    setItemNumber(itemValue);
+    const itemValue = event.target.id;
+    setItemName(itemValue);
   }
 
+  // retrieves tagged items from firebase and places the names in an array
 
   useEffect(() => {
     let tagNames = [];
@@ -82,7 +92,7 @@ const PlayGame = () => {
 
   const listItems = (
     tagOptions.map((item) => 
-      <li key = {uniqid()}>{item}</li>
+      <li key = {uniqid()} id = {item}>{item}</li>
     )
   )
 

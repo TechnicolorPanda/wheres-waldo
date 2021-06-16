@@ -10,8 +10,6 @@ const TaggedImage = (props) => {
     selectItem,
   } = props;
 
-  // TODO: drop down object name instead of key value
-
   return (
     <div className = 'content'>
       <div className = 'body'>
@@ -20,8 +18,8 @@ const TaggedImage = (props) => {
         ></img>
         <div className = 'dropdown-content' id = 'dropdown-content'>
           <ul>
-            <button onClick = {selectItem} value = {items}>
-              <div value = {items}>{items}</div>
+            <button onClick = {selectItem}>
+              {items}
             </button>
           </ul>
         </div>

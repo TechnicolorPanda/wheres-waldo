@@ -14,9 +14,9 @@ const config = () => {
     measurementId: "G-6SX66SH8T9"
   };
 
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.firestore();
-    database.settings( {timestampsInSnapshots: true });
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.firestore();
+  database.settings( {timestampsInSnapshots: true });
 
   return {
     database,
