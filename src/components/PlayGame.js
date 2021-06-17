@@ -3,7 +3,7 @@ import Header from './Header';
 import TaggedImage from './TaggedImage';
 import Score from './Score';
 import photoTag from './PhotoTag';
-import config from './firebaseConfig';
+import database from './firebase';
 import waldoBeach from '../images/waldo1.jpg';
 import uniqid from 'uniqid';
 
@@ -82,7 +82,7 @@ const PlayGame = () => {
 
   useEffect(() => {
     let tagNames = [];
-    config().database.collection('tags').get().then((snapshot) => {
+    database.collection('tags').get().then((snapshot) => {
       snapshot.docs.forEach(doc => {
         tagNames = tagNames.concat(doc.data().name);
       });

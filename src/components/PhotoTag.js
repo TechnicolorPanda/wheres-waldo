@@ -1,9 +1,10 @@
-import config from './firebaseConfig';
+import database from './firebase';
+import firebase from './firebase';
 
 const photoTag = () => {
 
   const retrieveXCoordinate = (selectedName) => {
-    config().database.collection('tags').get().then((snapshot) => {
+    database.collection('tags').get().then((snapshot) => {
       snapshot.docs.forEach(doc => {
         if (doc.data().name === selectedName) {
           return doc.data().x;
@@ -13,7 +14,7 @@ const photoTag = () => {
   }
 
   const retrieveYCoordinate = (selectedName) => {
-    config().database.collection('tags').get().then((snapshot) => {
+    database.collection('tags').get().then((snapshot) => {
       snapshot.docs.forEach(doc => {
         if (doc.data().name === selectedName) {
           return doc.data().y;
@@ -28,15 +29,14 @@ const photoTag = () => {
     }
   }
 
-  const selectTag = (selectedName, selectedX, selectedY) => {
-    // const correctX = retrieveXCoordinate(selectedName);
-    // const correctY = retrieveYCoordinate(selectedName);
-    // if (coordinateRange(correctX, selectedX) && coordinateRange(correctY, selectedY)) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-    return false;
+  const selectTag = (itemName, selectedX, selectedY) => {
+    const correctX = retrieveXCoordinate(itemName);
+    const correctY = retrieveYCoordinate(itemName);
+    if (coordinateRange(correctX, selectedX) && coordinateRange(correctY, selectedY)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   return {
