@@ -15,8 +15,9 @@ const PlayGame = () => {
   const [dropdown, setDropdown] = useState(false);
   const [xCoordinate, setXCoordinate] = useState(0);
   const [yCoordinate, setYCoordinate] = useState(0);
-  const [itemName, setItemName] = useState('');
+  const [itemName, setItemName] = useState(false);
   const [tagOptions, setTagOptions] = useState([]);
+  const [correctSelection, setCorrectSelection] = useState(false);
 
   const scores = Score();
   const tag = photoTag();
@@ -28,17 +29,26 @@ const PlayGame = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    console.log('correctSelection');
+    if (correctSelection === true) {
+      const currentScore = scores.changeScore(correctSelection);
+      console.log(currentScore);
+      setItems(currentScore);
+      setCorrectSelection(false);
+    }
+  }, [correctSelection])
+
   // changes remaining items when correct item is selected
 
   useEffect(() => {
     console.log('item number ' + itemName)
 
+    // TODO: make this asynchronous
+
      if(typeof itemName === 'string') {
-      const correctSelection = tag.selectTag(itemName, xCoordinate, yCoordinate);
+      setCorrectSelection(tag.selectTag(itemName, xCoordinate, yCoordinate));
       console.log(correctSelection);
-      const currentScore = scores.changeScore(correctSelection);
-      console.log(currentScore);
-      setItems(currentScore);
     }
   }, [itemName]);
 

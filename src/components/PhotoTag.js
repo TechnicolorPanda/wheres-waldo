@@ -1,5 +1,4 @@
 import database from './firebase';
-import firebase from './firebase';
 
 const photoTag = () => {
 
@@ -7,7 +6,10 @@ const photoTag = () => {
     database.collection('tags').get().then((snapshot) => {
       snapshot.docs.forEach(doc => {
         if (doc.data().name === selectedName) {
+          console.log(doc.data().x);
           return doc.data().x;
+        } else {
+          console.log(doc.data().name);
         };
       });
     })
@@ -29,14 +31,23 @@ const photoTag = () => {
     }
   }
 
-  const selectTag = (itemName, selectedX, selectedY) => {
-    const correctX = retrieveXCoordinate(itemName);
-    const correctY = retrieveYCoordinate(itemName);
+  const correctSelection = (correctX, selectedX, correctY, selectedY) => {
     if (coordinateRange(correctX, selectedX) && coordinateRange(correctY, selectedY)) {
       return true;
     } else {
       return false;
     }
+  }
+
+  const selectTag = (itemName, selectedX, selectedY) => {
+    const correctX = retrieveXCoordinate(itemName);
+    const correctY = retrieveYCoordinate(itemName);
+    console.log('x = ' + correctX);
+    console.log('y = ' + correctY);
+
+    // TODO: return only after promise is returned
+
+    return correctSelection(correctX, selectedX, correctY, selectedY)
   }
 
   return {
