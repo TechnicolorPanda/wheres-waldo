@@ -2,54 +2,41 @@ import database from './firebase';
 
 const photoTag = () => {
 
-  const retrieveXCoordinate = (selectedName) => {
-    database.collection('tags').get().then((snapshot) => {
-      snapshot.docs.forEach(doc => {
+  const selectTag = async (selectedName, selectedX, selectedY) => {
+    const snapshot = await database.collection('tags').get();
+    ((snapshot.docs
+      .forEach(doc => {
         if (doc.data().name === selectedName) {
-          console.log(doc.data().x);
-          return doc.data().x;
-        } else {
           console.log(doc.data().name);
-        };
-      });
-    })
-  }
-
-  const retrieveYCoordinate = (selectedName) => {
-    database.collection('tags').get().then((snapshot) => {
-      snapshot.docs.forEach(doc => {
-        if (doc.data().name === selectedName) {
-          return doc.data().y;
-        };
-      });
-    })
-  }
-
+          const correctX = correctSelection(doc.data().x, selectedX);
+          console.log(correctX);
+          console.log(doc.data().x)
+          const correctY = correctSelection(doc.data().y, selectedY);
+          if (correctX && correctY) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      })));
+    }
+    
   const coordinateRange = (correctCoordinate, selectedCoordinate) => {
     if (selectedCoordinate <= (correctCoordinate + 5) && (selectedCoordinate >= correctCoordinate - 5)) {
       return true;
     }
   }
 
-  const correctSelection = (correctX, selectedX, correctY, selectedY) => {
-    if (coordinateRange(correctX, selectedX) && coordinateRange(correctY, selectedY)) {
+  const correctSelection = (correctCoordinate, selectedCoordinate) => {
+    console.log(correctCoordinate);
+    console.log(selectedCoordinate);
+    if (coordinateRange(correctCoordinate, selectedCoordinate)) {
       return true;
     } else {
       return false;
     }
-  }
-
-  // TODO: test for correctSelection only after X and Y coordinates are returned
-
-  const selectTag = async(itemName, selectedX, selectedY) => {
-    const correctX = await retrieveXCoordinate(itemName);
-    const correctY = await retrieveYCoordinate(itemName);
-    console.log('x = ' + correctX);
-    console.log('y = ' + correctY);
-
-    const correct = await correctSelection(correctX, selectedX, correctY, selectedY);
-    console.log('x await ' + correctX);
-    return correct;
   }
 
   return {
