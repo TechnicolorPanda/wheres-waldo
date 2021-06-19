@@ -39,15 +39,17 @@ const photoTag = () => {
     }
   }
 
-  const selectTag = (itemName, selectedX, selectedY) => {
-    const correctX = retrieveXCoordinate(itemName);
-    const correctY = retrieveYCoordinate(itemName);
+  // TODO: test for correctSelection only after X and Y coordinates are returned
+
+  const selectTag = async(itemName, selectedX, selectedY) => {
+    const correctX = await retrieveXCoordinate(itemName);
+    const correctY = await retrieveYCoordinate(itemName);
     console.log('x = ' + correctX);
     console.log('y = ' + correctY);
 
-    // TODO: return only after promise is returned
-
-    return correctSelection(correctX, selectedX, correctY, selectedY)
+    const correct = await correctSelection(correctX, selectedX, correctY, selectedY);
+    console.log('x await ' + correctX);
+    return correct;
   }
 
   return {
