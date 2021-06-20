@@ -12,7 +12,7 @@ const TaggedImage = (props) => {
 
   return (
     <div className = 'content'>
-      <div className = 'body'>
+      <div className = 'body' id = 'image-area'>
         <img className = 'play' src = {photo} alt = 'Wheres Waldo Beach Scene'
           onClick = {findItem}
         ></img>

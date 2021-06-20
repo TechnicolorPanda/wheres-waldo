@@ -1,22 +1,43 @@
+import x from 'uniqid';
 import database from './firebase';
 
 const photoTag = () => {
+
+  const getScreenSize = () => {
+    const div = document.getElementById('image-area');
+    const area = div.getBoundingClientRect();
+    let x = area.width;
+    let y = area.height;
+    console.log(x, y);
+    return {x, y};
+  }
 
   // TODO: use .getBoundingClientRect() to determine position of image within the frame
   // Create test for this feature
 
   // uses size of screen to determine current placement of coordinate
 
-  const resizeCoordinate = (oldCoordinate, newSize, coordinateType) => {
+  const resizeCoordinate = (oldCoordinate, coordinateType) => {
     let oldSize;
-    if (coordinateType === 'x') {oldSize = 1053};
-    if (coordinateType === 'y') {oldSize = 669};
+    let newSize = getScreenSize();
+
+    if (coordinateType === 'x') {
+      oldSize = 1053; 
+      newSize = newSize.x;
+    };
+    if (coordinateType === 'y') {
+      oldSize = 504;
+      newSize = newSize.y;
+    };
     return (oldCoordinate * newSize) / oldSize;
   }
 
-  // TODO: return consistant X coordinate
-
   const selectTag = async (selectedName, selectedX, selectedY) => {
+
+    console.log(selectedX, selectedY)
+
+    const newSelectedX = resizeCoordinate(selectedX, 'x');
+    const newSelectedY = resizeCoordinate(selectedY, 'y');
 
     // retrieves data regarding locations of items from firebase
 
@@ -28,8 +49,8 @@ const photoTag = () => {
         // coordinates of the item
 
         if (doc.data().name === selectedName) {
-          const correctX = correctSelection(doc.data().x, selectedX);
-          const correctY = correctSelection(doc.data().y, selectedY);
+          const correctX = correctSelection(doc.data().x, newSelectedX);
+          const correctY = correctSelection(doc.data().y, newSelectedY);
           if (correctX && correctY) {
             return true;
           } else {
