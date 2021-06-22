@@ -1,4 +1,3 @@
-import x from 'uniqid';
 import database from './firebase';
 
 const photoTag = () => {
@@ -39,6 +38,8 @@ const photoTag = () => {
     const newSelectedX = resizeCoordinate(selectedX, 'x');
     const newSelectedY = resizeCoordinate(selectedY, 'y');
 
+    console.log(newSelectedX, newSelectedY);
+    
     // retrieves data regarding locations of items from firebase
 
     const snapshot = await database.collection('tags').get();
@@ -49,9 +50,13 @@ const photoTag = () => {
         // coordinates of the item
 
         if (doc.data().name === selectedName) {
+          console.log(doc.data().x, doc.data().y);
+          console.log(newSelectedX, newSelectedY);
           const correctX = correctSelection(doc.data().x, newSelectedX);
           const correctY = correctSelection(doc.data().y, newSelectedY);
+          console.log(correctX, correctY);
           if (correctX && correctY) {
+            console.log('correct');
             return true;
           } else {
             return false;

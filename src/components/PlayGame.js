@@ -44,13 +44,13 @@ const PlayGame = () => {
   useEffect(() => {
     console.log('item number ' + itemName)
 
-    // TODO: make this asynchronous
-
      if(typeof itemName === 'string') {
+
+      // TODO: set state when selectTag finishes running
+
       setCorrectSelection(tag.selectTag(itemName, xCoordinate, yCoordinate));
-      console.log(correctSelection);
     }
-  }, [itemName]);
+  }, [itemName])
 
   // toggles between hiding and showing dropdown menu
 
