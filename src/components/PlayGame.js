@@ -41,6 +41,14 @@ const PlayGame = () => {
 
   // changes remaining items when correct item is selected
 
+  async function isTagCorrect(itemName, xCoordinate, yCoordinate) {
+
+    let tagCorrect = await tag.selectTag(itemName, xCoordinate, yCoordinate);
+    console.log(tagCorrect);
+    return tagCorrect;
+  }
+
+
   useEffect(() => {
     console.log('item number ' + itemName)
 
@@ -48,7 +56,7 @@ const PlayGame = () => {
 
       // TODO: set state when selectTag finishes running
 
-      setCorrectSelection(tag.selectTag(itemName, xCoordinate, yCoordinate));
+      setCorrectSelection(isTagCorrect(itemName, xCoordinate, yCoordinate));
     }
   }, [itemName])
 
@@ -86,6 +94,7 @@ const PlayGame = () => {
     event.preventDefault();
     const itemValue = event.target.id;
     setItemName(itemValue);
+    setDropdown(!dropdown);
   }
 
   // retrieves tagged items from firebase and places the names in an array
