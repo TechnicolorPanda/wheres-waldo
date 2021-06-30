@@ -1,15 +1,19 @@
-import React, { Component } from 'react';
-import PlayGame from './components/PlayGame';
 import './App.css';
+import React from 'react';
+import PlayGame from './components/PlayGame';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-class App extends Component {
-  render() {
-    return (
-      <div className = "play-board">
-        <PlayGame/>
-      </div>
-    );
-  }
+function App() {
+
+  return (
+    <Router>
+        <div className = 'content'>
+          <Switch>
+            <Route path = '/playgame' component = {PlayGame} />
+          </Switch>
+        </div>
+    </Router>
+  );
 }
 
 export default App;

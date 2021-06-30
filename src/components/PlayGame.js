@@ -5,6 +5,7 @@ import Score from './Score';
 import photoTag from './PhotoTag';
 import database from './firebase';
 import waldoBeach from '../images/waldo1.jpg';
+import { Link } from 'react-router-dom';
 import uniqid from 'uniqid';
 
 const PlayGame = () => {
@@ -18,6 +19,7 @@ const PlayGame = () => {
   const [itemName, setItemName] = useState(false);
   const [tagOptions, setTagOptions] = useState([]);
   const [correctSelection, setCorrectSelection] = useState(false);
+  const [gameFinished, setGameFinished] = useState(false);
 
   const scores = Score();
   const tag = photoTag();
@@ -95,6 +97,7 @@ const PlayGame = () => {
     const itemValue = event.target.id;
     setItemName(itemValue);
     setDropdown(!dropdown);
+    setGameFinished(true);
   }
 
   // retrieves tagged items from firebase and places the names in an array
