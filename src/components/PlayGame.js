@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from './Header';
 import TaggedImage from './TaggedImage';
 import Score from './Score';
@@ -22,6 +23,13 @@ const PlayGame = () => {
 
   const scores = Score();
   const tag = photoTag();
+  const history = useHistory();
+
+  useEffect(() => {
+    if(gameFinished) {
+      history.push('/high-scores');
+    }
+  }, [gameFinished]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -96,6 +104,8 @@ const PlayGame = () => {
     const itemValue = event.target.id;
     setItemName(itemValue);
     setDropdown(!dropdown);
+
+    // TODO: only change gameFinished to true upon all items being located
     setGameFinished(true);
   }
 
