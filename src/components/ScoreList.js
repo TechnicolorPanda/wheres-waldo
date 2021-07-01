@@ -6,6 +6,8 @@ const ScoreList = (props) => {
     highScores
   } = props;
 
+  console.log('score list');
+
   return (
     <div className = 'content'>
         <div className = 'score-list' id = 'score-list'>

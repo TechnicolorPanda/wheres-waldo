@@ -5,7 +5,6 @@ import Score from './Score';
 import photoTag from './PhotoTag';
 import database from './firebase';
 import waldoBeach from '../images/waldo1.jpg';
-import { Link } from 'react-router-dom';
 import uniqid from 'uniqid';
 
 const PlayGame = () => {

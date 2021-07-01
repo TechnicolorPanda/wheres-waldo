@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import ScoreList from './ScoreList';
-import Score from './Score';
-import database from './firebase';
-import uniqid from 'uniqid';
+// import Score from './Score';
+// import database from './firebase';
+// import uniqid from 'uniqid';
 
 const HighScores = () => {
 
-  const [highScores, setHighScores] = useState([]);
+  const [highScores, setHighScores] = useState(0);
 
+  useEffect(() => {
+    setHighScores(1);
+  }, []);
+
+  console.log('high scores');
 
     return (
         <div>
