@@ -1,0 +1,76 @@
+/* standard style reset */
+html,
+body,
+header,
+nav,
+h1,
+a,
+ul,
+li,
+strong,
+main,
+button,
+i,
+section,
+img,
+div,
+h2,
+h3,
+h4,
+h5,
+p,
+form,
+fieldset,
+label,
+input,
+textarea,
+span,
+article,
+footer,
+time,
+small,
+aside {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  vertical-align: inherit;
+  box-sizing: inherit;
+}
+
+div.play-board {
+  margin-top: 2rem;
+}
+
+label {
+  padding: 1rem;
+}
+
+#nameInput {
+  background-color: rgb(188, 205, 206);
+  height: 2rem;
+  padding: 1rem;
+}
+
+#content {
+  font-size: large;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  background-color: lightgray;
+  padding: .5rem;
+  border: solid;
+  border-width: 1px;
+  border-radius: 3px;
+}

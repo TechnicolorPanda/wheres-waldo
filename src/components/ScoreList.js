@@ -3,7 +3,7 @@ import React from 'react';
 const ScoreList = (props) => {
 
   const { 
-    highScores
+    name,
   } = props;
 
   console.log('score list');
@@ -12,7 +12,7 @@ const ScoreList = (props) => {
     <div className = 'content'>
         <div className = 'score-list' id = 'score-list'>
           <ul>
-            {highScores}
+            {name}
           </ul>
       </div>
     </div>
