@@ -11,7 +11,7 @@ const HighScores = (props) => {
   const [refreshList, setRefreshList] = useState(false);
   const time = props.location.state.timer;
 
-  // TODO: add completion time to high score list
+  // writes player name to high score list
 
   const enterName = (event) => {
     event.preventDefault();
@@ -25,6 +25,8 @@ const HighScores = (props) => {
     });
     setRefreshList(true);
   }
+
+  // retrieves and displays high score list from Firebase
 
   useEffect(() => {
     let playerNames;
@@ -41,26 +43,36 @@ const HighScores = (props) => {
   }, [refreshList]);
 
   return (
-    <div> {refreshList ? null:
-      <form onSubmit = {enterName}>
-        <label htmlFor = 'nameInput'>Name </label>
-        <input 
-          onChange = {event => setName(event.target.value)}
-          value = {name}
-          name = 'name'
-          type = 'text' 
-          id = 'nameInput' />
-        <button>Submit</button>
-      </form>}
 
-      <h2>High Scores</h2>
+    <div id = 'background'> 
 
-      {names.map((playerInfo) => {
-        return(<ScoreList key = {uniqid()}
-          name = {playerInfo.name}
-          time = {playerInfo.time}
-        />
-      )})}
+      {/* displays form to enter name into high score list */}
+
+      {refreshList ? null:
+        <form onSubmit = {enterName}>
+          <label htmlFor = 'nameInput'>Name </label>
+          <input 
+            onChange = {event => setName(event.target.value)}
+            value = {name}
+            name = 'name'
+            type = 'text' 
+            id = 'nameInput' />
+          <button>Submit</button>
+        </form>
+      }
+
+      {/* displays retrieved high score list */}
+
+      <div id = 'scores'>
+        <h2>High Scores</h2>
+
+        {names.map((playerInfo) => {
+          return(<ScoreList key = {uniqid()}
+            name = {playerInfo.name}
+            time = {playerInfo.time}
+          />
+        )})}
+      </div>
     </div>
   )
 }   
