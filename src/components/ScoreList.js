@@ -4,6 +4,7 @@ const ScoreList = (props) => {
 
   const { 
     name,
+    time,
   } = props;
 
   console.log('score list');
@@ -12,7 +13,7 @@ const ScoreList = (props) => {
     <div className = 'content'>
         <div className = 'score-list' id = 'score-list'>
           <ul>
-            {name}
+            {name}: { time}
           </ul>
       </div>
     </div>

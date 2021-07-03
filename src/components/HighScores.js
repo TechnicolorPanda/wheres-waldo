@@ -9,27 +9,34 @@ const HighScores = () => {
   const [name, setName] = useState('');
   const [names, setNames] = useState([]);
 
+  // TODO: add completion time to high score list
+
   const enterName = (event) => {
     event.preventDefault();
     const newName = event.target.name.value;
-    // setNames(names => names.concat(newName));
-    const savedName = {name: newName};
-    database.collection('high-scores').doc(name).set(savedName).then(() => {
+    const savedPlayer = {
+      name: newName,
+      time: '00:00'
+    };
+    database.collection('high-scores').doc(name).set(savedPlayer).then(() => {
       console.log("Document successfully written!");
   });
   }
 
   useEffect(() => {
-    let playerNames = [];
+    let playerNames;
+    let playerTimes;
+    let playerInfo = [];
     database.collection('high-scores').get().then((snapshot) => {
       snapshot.docs.forEach(doc => {
-        playerNames = playerNames.concat(doc.data().name);
+        playerNames = doc.data().name;
+        playerTimes = doc.data().time;
+        playerInfo = playerInfo.concat({name: playerNames, time: playerTimes})
+        console.log(playerInfo[0].name);
       });
-      setNames(playerNames);
+      setNames(playerInfo);
     })
   }, []);
-
-  console.log('high scores');
 
   return (
     <div>
@@ -46,9 +53,10 @@ const HighScores = () => {
 
       <h2>High Scores</h2>
 
-      {names.map((name) => {
+      {names.map((playerInfo) => {
         return(<ScoreList key = {uniqid()}
-          name = {name} 
+          name = {playerInfo.name}
+          time = {playerInfo.time}
         />
       )})}
     </div>
