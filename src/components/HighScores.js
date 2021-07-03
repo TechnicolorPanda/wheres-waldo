@@ -8,6 +8,7 @@ const HighScores = (props) => {
 
   const [name, setName] = useState('');
   const [names, setNames] = useState([]);
+  const [refreshList, setRefreshList] = useState(false);
   const time = props.location.state.timer;
 
   // TODO: add completion time to high score list
@@ -21,7 +22,8 @@ const HighScores = (props) => {
     };
     database.collection('high-scores').doc(name).set(savedPlayer).then(() => {
       console.log("Document successfully written!");
-  });
+    });
+    setRefreshList(true);
   }
 
   useEffect(() => {
@@ -36,10 +38,10 @@ const HighScores = (props) => {
       });
       setNames(playerInfo);
     })
-  }, []);
+  }, [refreshList]);
 
   return (
-    <div>
+    <div> {refreshList ? null:
       <form onSubmit = {enterName}>
         <label htmlFor = 'nameInput'>Name </label>
         <input 
@@ -49,7 +51,7 @@ const HighScores = (props) => {
           type = 'text' 
           id = 'nameInput' />
         <button>Submit</button>
-      </form>
+      </form>}
 
       <h2>High Scores</h2>
 
