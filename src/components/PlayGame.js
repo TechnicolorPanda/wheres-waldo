@@ -27,7 +27,7 @@ const PlayGame = () => {
 
   useEffect(() => {
     if(gameFinished) {
-      history.push('/high-scores');
+      history.push('/high-scores', {timer: timer});
     }
   }, [gameFinished]);
 

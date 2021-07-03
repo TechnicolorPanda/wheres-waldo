@@ -4,10 +4,11 @@ import uniqid from 'uniqid';
 import '../styles/high-scores.css';
 import database from './firebase';
 
-const HighScores = () => {
+const HighScores = (props) => {
 
   const [name, setName] = useState('');
   const [names, setNames] = useState([]);
+  const time = props.location.state.timer;
 
   // TODO: add completion time to high score list
 
@@ -16,7 +17,7 @@ const HighScores = () => {
     const newName = event.target.name.value;
     const savedPlayer = {
       name: newName,
-      time: '00:00'
+      time: time,
     };
     database.collection('high-scores').doc(name).set(savedPlayer).then(() => {
       console.log("Document successfully written!");
@@ -32,7 +33,6 @@ const HighScores = () => {
         playerNames = doc.data().name;
         playerTimes = doc.data().time;
         playerInfo = playerInfo.concat({name: playerNames, time: playerTimes})
-        console.log(playerInfo[0].name);
       });
       setNames(playerInfo);
     })
