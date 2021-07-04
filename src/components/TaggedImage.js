@@ -18,7 +18,7 @@ const TaggedImage = (props) => {
         ></img>
         <div className = 'dropdown-content' id = 'dropdown-content'>
           <ul>
-            <button onClick = {selectItem}>
+            <button id = 'dropdown' onClick = {selectItem}>
               {items}
             </button>
           </ul>

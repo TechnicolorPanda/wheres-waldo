@@ -2,13 +2,17 @@ import database from './firebase';
 
 const photoTag = () => {
 
-  const getScreenSize = () => {
+  const getScreenSize = (coordinateType) => {
     const div = document.getElementById('image-area');
     const area = div.getBoundingClientRect();
     let x = area.width;
     let y = area.height;
     console.log(x, y);
-    return {x, y};
+    if (coordinateType === 'x') {
+      return x;
+    } else {
+      return y;
+    }
   }
 
   // TODO: use .getBoundingClientRect() to determine position of image within the frame
@@ -18,28 +22,22 @@ const photoTag = () => {
 
   const resizeCoordinate = (oldCoordinate, coordinateType) => {
     let oldSize;
-    let newSize = getScreenSize();
+    let newSize = getScreenSize(coordinateType);
+    console.log('new size ' + newSize);
+    console.log('old coordinate ' + oldCoordinate);
+    console.log('coordinate type ' + coordinateType);
 
     if (coordinateType === 'x') {
-      oldSize = 1053; 
-      newSize = newSize.x;
+      oldSize = 895; 
     };
     if (coordinateType === 'y') {
       oldSize = 504;
-      newSize = newSize.y;
     };
     return (oldCoordinate * newSize) / oldSize;
   }
 
   const selectTag = async (selectedName, selectedX, selectedY) => {
 
-    console.log(selectedX, selectedY)
-
-    const newSelectedX = resizeCoordinate(selectedX, 'x');
-    const newSelectedY = resizeCoordinate(selectedY, 'y');
-
-    console.log(newSelectedX, newSelectedY);
-    
     // retrieves data regarding locations of items from firebase
 
     const snapshot = await database.collection('tags').get();
@@ -49,11 +47,16 @@ const photoTag = () => {
         // if the name of the item is the same as the tag selected in the dropdown menu, retrieve the
         // coordinates of the item
 
+        // TODO: coordinates are not measuring out right
+
+        const adjustedX = resizeCoordinate(doc.data().x, 'x');
+        const adjustedY = resizeCoordinate(doc.data().y, 'y');
+
         if (doc.data().name === selectedName) {
-          console.log(doc.data().x, doc.data().y);
-          console.log(newSelectedX, newSelectedY);
-          const correctX = correctSelection(doc.data().x, newSelectedX);
-          const correctY = correctSelection(doc.data().y, newSelectedY);
+          console.log(selectedX, selectedY);
+          console.log(adjustedX, adjustedY);
+          const correctX = correctSelection(adjustedX, selectedX);
+          const correctY = correctSelection(adjustedY, selectedY);
           console.log(correctX, correctY);
           if (correctX && correctY) {
             console.log('correct');
@@ -70,7 +73,7 @@ const photoTag = () => {
   // determines if selected coordinate is within 5 pixels of tagged coordinate
     
   const coordinateRange = (correctCoordinate, selectedCoordinate) => {
-    if (selectedCoordinate <= (correctCoordinate + 5) && (selectedCoordinate >= correctCoordinate - 5)) {
+    if (selectedCoordinate <= (correctCoordinate + 10) && (selectedCoordinate >= correctCoordinate - 10)) {
       return true;
     }
   }

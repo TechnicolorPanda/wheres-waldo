@@ -57,7 +57,7 @@ const HighScores = (props) => {
             name = 'name'
             type = 'text' 
             id = 'nameInput' />
-          <button>Submit</button>
+          <button id = 'submit'>Submit</button>
         </form>
       }
 

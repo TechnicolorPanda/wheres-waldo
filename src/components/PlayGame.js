@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from './Header';
@@ -12,7 +13,6 @@ const PlayGame = () => {
 
   const [items, setItems] = useState(3);
   const [timer, setTimer] = useState(0);
-  const [photo, setPhoto] = useState(waldoBeach);
   const [dropdown, setDropdown] = useState(false);
   const [xCoordinate, setXCoordinate] = useState(0);
   const [yCoordinate, setYCoordinate] = useState(0);
@@ -21,6 +21,7 @@ const PlayGame = () => {
   const [correctSelection, setCorrectSelection] = useState(false);
   const [gameFinished, setGameFinished] = useState(false);
 
+  const photo = waldoBeach;
   const scores = Score();
   const tag = photoTag();
   const history = useHistory();
@@ -105,8 +106,12 @@ const PlayGame = () => {
     setItemName(itemValue);
     setDropdown(!dropdown);
 
-    // TODO: only change gameFinished to true upon all items being located
-    setGameFinished(true);
+    // TODO: set items to 0
+
+    if (items === 3) {
+      console.log('all items selected');
+      setGameFinished(true);
+    }
   }
 
   // retrieves tagged items from firebase and places the names in an array

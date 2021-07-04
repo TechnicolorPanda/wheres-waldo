@@ -58,6 +58,10 @@ img {
   width: 800px;
 }
 
+#dropdown {
+  background-color: rgb(188, 205, 206);
+}
+
 .dropdown-content {
   position: absolute;
   top: 100%;
@@ -65,10 +69,11 @@ img {
   width: auto;
   z-index: 2;
   border: 1px solid black;
-  border-radius: 2%;
+  border-radius: 4%;
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
-  background-color: lightskyblue;
+  background-color: rgb(188, 205, 206);
   font: 'arial';
+  padding: .5em;
 }
 
 ul {
