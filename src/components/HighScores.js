@@ -32,13 +32,18 @@ const HighScores = (props) => {
     let playerNames;
     let playerTimes;
     let playerInfo = [];
+    let playerList = [];
     database.collection('high-scores').get().then((snapshot) => {
       snapshot.docs.forEach(doc => {
         playerNames = doc.data().name;
         playerTimes = doc.data().time;
-        playerInfo = playerInfo.concat({name: playerNames, time: playerTimes})
+        playerInfo = playerInfo.concat({name: playerNames, time: playerTimes});
+
+        // sorts times from fastest to slowest
+        
+        playerList = playerInfo.sort((a, b) => a.time - b.time ? 1 : -1);
       });
-      setNames(playerInfo);
+      setNames(playerList);
     })
   }, [refreshList]);
 
